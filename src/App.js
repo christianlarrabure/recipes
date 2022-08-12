@@ -1,24 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+
+import { RecipeList } from './components/RecipeList.jsx';
+import { Recipe } from './components/Recipe.jsx';
+
+import './css/main.css';
+
+async function fetchRecipes() {
+  return new Promise((resolve, reject) => {
+    axios.get("https://urchin-app-jcoem.ondigitalocean.app/api/v1/recipes/")
+      .then((data) => {
+        resolve(data.data);
+      })
+  })
+}
 
 function App() {
+  const [recipes, setRecipes] = useState([]);
+
+  useEffect(() => {
+    fetchRecipes().then((recipes) => {
+      setRecipes(recipes);
+    })
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main>
+      <RecipeList>
+        {recipes.map(recipe => (<Recipe key={recipe.id} recipe={recipe}/>))}
+      </RecipeList>
+    </main>
   );
 }
 

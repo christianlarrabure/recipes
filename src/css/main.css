@@ -1,0 +1,24 @@
+
+:root {
+    --color1: #F2163E;
+    --color2: #593A28;
+    --color3: #D9B5A0;
+    --color4: #D90404;
+    --color5: #D95252;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+main {
+    width: 100vw;
+    padding: 20px 40px;
+}
